@@ -46,6 +46,21 @@ void onewire_write_bit(onewire_t *ow, int bit)
 
 //#####################################################################
 
+void onewire_write_serial_number_bit(onewire_t *ow, int bit)
+{
+  //The RW1990 requires that we invert our writing logic
+  onewire_line_low(ow);
+  if (bit)
+    DELAY_US(64);
+  else
+    DELAY_US(6);
+  onewire_line_high(ow);
+  DELAY_MS(10);
+
+}
+
+//#####################################################################
+
 int onewire_read_bit(onewire_t *ow)
 {
   int bit;
@@ -67,6 +82,18 @@ void onewire_write_byte(onewire_t *ow, uint8_t byte)
   for(i = 0; i < 8; i++)
   {
     onewire_write_bit(ow, byte & 1);
+    byte >>= 1;
+  }
+}
+
+//#####################################################################
+
+void onewire_write_serial_number_byte(onewire_t *ow, uint8_t byte)
+{
+  int i;
+  for(i = 0; i < 8; i++)
+  {
+    onewire_write_serial_number_bit(ow, byte & 1);
     byte >>= 1;
   }
 }

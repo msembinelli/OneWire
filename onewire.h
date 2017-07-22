@@ -24,6 +24,8 @@ int onewire_reset(onewire_t *ow);
 void onewire_write_bit(onewire_t *ow, int bit);
 int onewire_read_bit(onewire_t *ow);
 void onewire_write_byte(onewire_t *ow, uint8_t byte);
+void onewire_write_serial_number_bit(onewire_t *ow, int bit);
+void onewire_write_serial_number_byte(onewire_t *ow, uint8_t byte);
 uint8_t onewire_read_byte(onewire_t *ow);
 void onewire_line_low(onewire_t *ow);
 void onewire_line_high(onewire_t *ow);
